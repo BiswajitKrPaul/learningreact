@@ -1,7 +1,7 @@
-import ExpenseItem from "./components/ExpenseItem";
+import Expenses from "./components/Expenses";
 
 function App() {
-  const ExpenseItems = [
+  const expenses = [
     {
       title: "MacBook Air M1",
       date: new Date(2021, 3, 25),
@@ -16,17 +16,7 @@ function App() {
 
   return (
     <div>
-      <h2>Let's get started!</h2>
-      <ExpenseItem
-        title={ExpenseItems[0].title}
-        amount={ExpenseItems[0].amount}
-        date={ExpenseItems[0].date}
-      ></ExpenseItem>
-      <ExpenseItem
-        title={ExpenseItems[1].title}
-        amount={ExpenseItems[1].amount}
-        date={ExpenseItems[1].date}
-      ></ExpenseItem>
+      <Expenses expenseitems={expenses}></Expenses>
     </div>
   );
 }
