@@ -1,21 +1,25 @@
 import "./ExpenseItem.css";
 import ExpenseDate from "./ExpenseDate";
 import Card from "../ui/Card";
-import React, { useState } from "react";
 
-function ExpenseItem(data) {
-  const [pl, setProps] = useState(data.title);
+function ExpenseItem(props) {
+
   const clickHandler = () => {
-    setProps("Updated");
+    const expenseItem = {...props.expenseitem};
+    expenseItem.title="Phone";
+    expenseItem.date=new Date(2019,4,23);
+    expenseItem.amount="400";
+    props.setExpenseItem(expenseItem,props.index);
   };
+
   return (
     <Card className="expense-item">
-      <ExpenseDate date={data.date}></ExpenseDate>
+      <ExpenseDate date={props.expenseitem.date}></ExpenseDate>
       <div className="expense-item__description">
-        <h2>{pl}</h2>
-        <div className="expense-item__price">${data.amount}</div>
+        <h2>{props.expenseitem.title}</h2>
+        <div className="expense-item__price">${props.expenseitem.amount}</div>
       </div>
-      <button onClick={clickHandler}>Click Me !!</button>
+      <button onClick={clickHandler}>Delete Expense</button>
     </Card>
   );
 }

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 
@@ -14,11 +15,18 @@ function App() {
       date: new Date(2021, 3, 26),
     },
   ];
+  const [expense, setExpense] = useState(expenses);
+
+  const AddExpense=(expenseitem)=>{
+    const expenses = [...expense];
+    expenses.push(expenseitem);
+    setExpense(expenses);
+  }
 
   return (
     <div>
-      <NewExpense></NewExpense>
-      <Expenses expenseitems={expenses}></Expenses>
+      <NewExpense addNewExpense={AddExpense}></NewExpense>
+      <Expenses expenseitems={expense} setExpense={setExpense}></Expenses>
     </div>
   );
 }

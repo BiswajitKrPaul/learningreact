@@ -3,18 +3,18 @@ import "./Expenses.css";
 import Card from "../ui/Card";
 
 function Expenses(props) {
+  function setExpenseItem(expenseitem, index) {
+    const expenses = [...props.expenseitems];
+    expenses.splice(index,1);
+    props.setExpense(expenses);
+  }
   return (
     <Card className="expenses">
-      <ExpenseItem
-        title={props.expenseitems[0].title}
-        amount={props.expenseitems[0].amount}
-        date={props.expenseitems[0].date}
-      ></ExpenseItem>
-      <ExpenseItem
-        title={props.expenseitems[1].title}
-        amount={props.expenseitems[1].amount}
-        date={props.expenseitems[1].date}
-      ></ExpenseItem>
+      {props.expenseitems.map((expenseitem, i) => {
+        return (
+          <ExpenseItem expenseitem={expenseitem} key={i} index={i} setExpenseItem={setExpenseItem}></ExpenseItem>
+        );
+      })}
     </Card>
   );
 }
