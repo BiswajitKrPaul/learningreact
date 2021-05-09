@@ -1,21 +1,35 @@
-import ExpenseItem from "./ExpenseItem";
 import "./Expenses.css";
 import Card from "../ui/Card";
+import ExpenseFilter from "./ExpenseFilter";
+import "./ExpenseFilter.css";
+import { useState } from "react";
+import ExpenseList from "./ExpenseList"
 
 function Expenses(props) {
-  function setExpenseItem(expenseitem, index) {
-    const expenses = [...props.expenseitems];
-    expenses.splice(index,1);
-    props.setExpense(expenses);
-  }
+  // function DeleteExpenseItem(expenseitem, index) {
+  //   const expenses = [...props.expenseitems];
+  //   expenses.splice(index, 1);
+  //   props.setExpense(expenses);
+  // }
+
+  const [year, setYear] = useState("2021");
+
+  const getExpenseFilterYear = (year) => {
+    setYear(year);
+    console.log(year);
+  };
+
+  const filteredExpense=props.expenseitems.filter(expense=>expense.date.getFullYear().toString()===year);
   return (
-    <Card className="expenses">
-      {props.expenseitems.map((expenseitem, i) => {
-        return (
-          <ExpenseItem expenseitem={expenseitem} key={i} index={i} setExpenseItem={setExpenseItem}></ExpenseItem>
-        );
-      })}
-    </Card>
+    <div>
+      <Card className="expenses">
+        <ExpenseFilter
+          selected={year}
+          getExpenseFilterYear={getExpenseFilterYear}
+        />
+        <ExpenseList expenses={filteredExpense}/>
+      </Card>
+    </div>
   );
 }
 

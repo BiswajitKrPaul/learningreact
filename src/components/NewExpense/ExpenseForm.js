@@ -4,15 +4,28 @@ import "./ExpenseForm.css";
 const ExpenseForm = (props) => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState("");
 
   const clickHandler = (e) => {
-    const newExpenseItem={title,amount,date};    //{title:title , amount:amount , date:date}
+    e.preventDefault();
+    const newExpenseItem = {
+      title: title,
+      amount: amount,
+      date: new Date(date),
+    }; //{title:title , amount:amount , date:date}
     props.addNewExpense(newExpenseItem);
+    setTitle("");
+    setAmount("");
+    setDate("");
+    props.setFlag("false");
+  };
+
+  const onCancelClick = () => {
+    props.setFlag("false");
   };
 
   return (
-    <div>
+    <form onSubmit={clickHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
@@ -44,15 +57,18 @@ const ExpenseForm = (props) => {
             max="2022-12-31"
             value={date}
             onChange={(e) => {
-              setDate(new Date(e.target.value));
+              setDate(e.target.value);
             }}
           />
         </div>
       </div>
       <div className="new-expense__actions">
-        <button onClick={clickHandler}>Add New Expense</button>
+        <button type="submit">Add New Expense</button>
       </div>
-    </div>
+      <div className="new-expense__actions1">
+        <button onClick={onCancelClick}>Cancel</button>
+      </div>
+    </form>
   );
 };
 

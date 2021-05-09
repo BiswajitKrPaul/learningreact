@@ -1,13 +1,14 @@
-import ExpenseForm from "./ExpenseForm"
-import "./NewExpense.css"
+import "./NewExpense.css";
+import AddNewExpense from "./AddNewExpense";
 
-const NewExpense =(props)=>{
-    return (
-        <div className="new-expense">
-            <ExpenseForm addNewExpense={props.addNewExpense}/>
-        </div>
-    );
-
-}
+const NewExpense = (props) => {
+  return (
+    <AddNewExpense
+      flag={props.flag}
+      addNewExpense={props.addNewExpense}
+      setFlag={props.setFlag}
+    />
+  );
+};
 
 export default NewExpense;

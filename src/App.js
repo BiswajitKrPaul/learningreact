@@ -16,16 +16,19 @@ function App() {
     },
   ];
   const [expense, setExpense] = useState(expenses);
+  const [flag, setFlag] = useState("false");
 
-  const AddExpense=(expenseitem)=>{
-    const expenses = [...expense];
-    expenses.push(expenseitem);
-    setExpense(expenses);
-  }
+  const AddExpense = (expenseitem) => {
+    // const expenses = [...expense];
+    // expenses.push(expenseitem);
+    setExpense((prevExpense) => {
+      return [expenseitem, ...prevExpense];
+    });
+  };
 
   return (
     <div>
-      <NewExpense addNewExpense={AddExpense}></NewExpense>
+      <NewExpense addNewExpense={AddExpense} flag={flag} setFlag={setFlag}></NewExpense>
       <Expenses expenseitems={expense} setExpense={setExpense}></Expenses>
     </div>
   );
