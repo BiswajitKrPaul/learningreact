@@ -4,6 +4,7 @@ import ExpenseFilter from "./ExpenseFilter";
 import "./ExpenseFilter.css";
 import { useState } from "react";
 import ExpenseList from "./ExpenseList"
+import ExpenseChart from "./ExpenseChart";
 
 function Expenses(props) {
   // function DeleteExpenseItem(expenseitem, index) {
@@ -27,6 +28,7 @@ function Expenses(props) {
           selected={year}
           getExpenseFilterYear={getExpenseFilterYear}
         />
+        <ExpenseChart expenseArr={filteredExpense}/>
         <ExpenseList expenses={filteredExpense}/>
       </Card>
     </div>
